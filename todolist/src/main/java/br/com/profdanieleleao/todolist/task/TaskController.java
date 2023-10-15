@@ -54,13 +54,27 @@ public class TaskController {
 	//método para fazer update nas tarefas
 	//http://localhost:8080/tasks/id-da-tarefa
 	@PutMapping("/{id}")
-	public TaskModel update (@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
+	public ResponseEntity update (@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
+		
+		//se não encontrar com o id, retorne nulo.
+		var task = this.taskRepository.findById(id).orElse(null); 
+		
+		//verificando se a tarefa existe
+		if(task == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tarefa não encontrada");
+		}
+		
 		var idUser = request.getAttribute("idUser");
 		
-		var task = this.taskRepository.findById(id).orElse(null); //se não encontrar com o id, retorne nulo.
-		
+		//verificando se o usuário que quer alterar a tarefa é o dono dela - REVER PORQUE NÃO TÁ ENTRANDO
+		/*if (!task.getIdUser().equals(idUser)) {
+			System.out.println("to aqui");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário não tem autorização para alterar essa tarefa");
+		}*/
 		Utils.copyNonNullProperties(taskModel,task);		
+		var taskUpdated = this.taskRepository.save(task);
+		return ResponseEntity.ok().body(taskUpdated);
 		
-		return this.taskRepository.save(task);
+		//OBS.: NÃO DÁ PRA USAR TRY/CATCH DENTRO DESSE MÉTODO FACILMENTE POR CAUSA DO @REQUESTBODY E O QUE ELE FAZ 'POR TRÁS DOS PANOS'
 	}
 	}

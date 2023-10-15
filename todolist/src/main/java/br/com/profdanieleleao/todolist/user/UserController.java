@@ -41,6 +41,6 @@ public class UserController {
 		
 		//caso de sucesso da requisição
 		var userCreated = this.userRepository.save(userModel); //var é só a partir do java 17
-		return ResponseEntity.status(HttpStatus.CREATED).body(userCreated); //retorna os dados do objeto criado quando a requisição foi feita -> aparece em ferramentas como postman o resultado	
+		return ResponseEntity.status(HttpStatus.OK).body(userCreated); //retorna os dados do objeto criado quando a requisição foi feita -> aparece em ferramentas como postman o resultado	
 	}
 }

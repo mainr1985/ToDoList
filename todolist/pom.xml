@@ -55,6 +55,13 @@
 	   <version>0.7.0</version>
    </dependency>
 	
+	<!--Adicionando a dependência Dev Tools que facilita, entre outras coisas, com Live Reload da app-->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-devtools</artifactId>
+		<optional>true</optional>
+	</dependency>
+	
 	</dependencies>
 
 	<build>

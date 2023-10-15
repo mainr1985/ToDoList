@@ -42,4 +42,12 @@ public class TaskModel {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
+	//método para tratamento de exceção de excesso de caracteres passados no título
+	public void setTitle(String title) throws Exception {
+		if(title.length()>50) {
+			throw new Exception("O campo Title deve conter no máximo 50 caracteres.");
+		}
+		this.title = title;
+	}
+	
 }
