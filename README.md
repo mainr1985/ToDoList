@@ -1,3 +1,3 @@
 # ToDoList
 Lista de Tarefas
-Primeiro projeto em Spring Boot --> Lista de Tarefas criada no evento da Rocketseat
+Lista de Tarefas criada em evento da Rocketseat de SpringBoot
